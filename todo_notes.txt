@@ -1,0 +1,65 @@
+Create a public GitHub repository for your project.
+
+Your repository should include:
+    Source code
+    README
+    Prompt history
+    Commit history
+
+Commit Frequently
+
+Don't make one giant commit at the end.
+
+Instead, commit after meaningful progress.
+
+Good examples:
+    Create homepage
+    Add habit form
+    Display habits
+    Fix validation bug
+    Improve layout
+
+A meaningful commit history helps reviewers understand how your project evolved.
+
+Your project should be viewable through a live GitHub Pages link.
+This allows reviewers to open and test your application without downloading your code.
+GitHub Pages works well for simple HTML, CSS, and JavaScript projects. GitHub’s documentation says Pages can publish from a repository branch and source folder, such as the root folder / or /docs.
+
+Requirements
+
+Your deployed project should include:
+    A working GitHub Pages link
+    An index.html file
+    CSS and JavaScript files correctly connected
+    No private or sensitive information
+
+Basic Deployment Steps
+    Push your finished project to GitHub.
+    Make sure your main HTML file is named:
+        index.html
+     Open your repository on GitHub. 
+     Click Settings. 
+     Click Pages in the sidebar. 
+     Under Build and deployment, choose: 
+        Source: Deploy from a branch 
+        Branch: main 
+        Folder: /root 
+    Click Save. 
+    Wait a few minutes. 
+    Copy the live GitHub Pages URL and add it to your README. 
+
+GitHub notes that a Pages site needs an entry file like index.html, index.md, or README.md, and for a standard static web project, index.html is the expected choice. 
+
+Prompt history
+
+This does not need to be every single prompt.
+
+Instead, include the prompts that best demonstrate your thinking throughout the project.
+
+Examples might include:
+    Planning prompts 
+    Feature requests 
+    Debugging conversations 
+    Questions you asked AI 
+    Follow-up questions 
+    Times you asked AI to explain code

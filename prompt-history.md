@@ -12,4 +12,8 @@ The CSS isn't applying properly. Please give me the entire CSS code file to past
 
 Add a secondary goal, and redetermine the best martial art from the given info.
 
+> Web page currently resets to blank without displaying the results with pressing button.
+
+Web page currently resets to blank without displaying the results with pressing button.  Determine error.
+
 > 

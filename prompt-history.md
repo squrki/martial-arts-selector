@@ -30,4 +30,16 @@
 
 1. Add a reset form button to the main page.
 
+    > New code functions as intended
+
+1. Add license-free images representing the various martial arts in the background of the page.
+
+    > Added background sunset image. Doesn't pertain to martial arts.
+
+1. Why was that particular image selected?
+
+    > AI stated that the image was of a martial arts gymnasium.
+
+1. The visible parts of the image only show a sunset. Please select a different image.
+
     > 

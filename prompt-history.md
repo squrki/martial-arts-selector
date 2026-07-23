@@ -26,4 +26,8 @@
 
 1. Remove primary goal from secondary goal options.
 
+    > Code change is functional as intended.
+
+1. Add a reset form button to the main page.
+
     > 

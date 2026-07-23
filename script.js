@@ -179,3 +179,15 @@ document.getElementById('searchSchoolsBtn').addEventListener('click', function()
         `;
     }, 1500); // 1.5 second simulated delay
 });
+
+// Ensure hidden secondary options are restored when the main form is cleared
+document.getElementById('selectorForm').addEventListener('reset', function() {
+    const secondarySelect = document.getElementById('secondary_goal');
+    
+    Array.from(secondarySelect.options).forEach(option => {
+        if (option.value !== "") {
+            option.style.display = 'block';
+            option.disabled = false;
+        }
+    });
+});

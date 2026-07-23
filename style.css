@@ -81,3 +81,14 @@ hr {
 #matchName {
     color: #e74c3c;
 }
+
+/* Styling for the new reset button */
+.secondary-btn {
+    background-color: #95a5a6;
+    margin-top: 0.5rem;
+    /* Adds a little space between the two buttons */
+}
+
+.secondary-btn:hover {
+    background-color: #7f8c8d;
+}

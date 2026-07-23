@@ -1,6 +1,5 @@
 // script.js
 
-// 1. Define our database with updated fitness scoring
 const martialArts = [
     {
         name: "Brazilian Jiu-Jitsu (BJJ)",
@@ -29,12 +28,12 @@ const martialArts = [
     }
 ];
 
-// 2. Handle the form submission
 document.getElementById('selectorForm').addEventListener('submit', function(e) {
     e.preventDefault(); 
 
     // Get basic inputs
     const goal = document.getElementById('goal').value;
+    const secondaryGoal = document.getElementById('secondary_goal').value;
     const preference = document.getElementById('preference').value;
     const fitness = document.getElementById('fitness').value;
 
@@ -50,8 +49,15 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
     martialArts.forEach(art => {
         let currentScore = 0;
 
-        // Base Points
-        if (art.scores[goal]) currentScore += art.scores[goal];
+        // Goal Points: Multiply primary goal by 2 to give it more weight
+        if (art.scores[goal]) currentScore += (art.scores[goal] * 2);
+        
+        // Add secondary goal points if the user selected one
+        if (secondaryGoal !== "" && art.scores[secondaryGoal]) {
+            currentScore += art.scores[secondaryGoal];
+        }
+
+        // Preference Points
         if (art.scores[preference]) currentScore += art.scores[preference];
         
         // Fitness Points
@@ -60,23 +66,23 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
 
         // --- Custom Logic for Personal Attributes --- //
 
-        // Age Logic: Favor low-impact for older users, penalize extreme high-impact
+        // Age Logic
         if (age >= 50) {
             if (art.name === "Tai Chi") currentScore += 2;
             if (art.name === "MMA" || art.name === "Muay Thai") currentScore -= 1;
         }
 
-        // Height Logic: Taller individuals often have an advantage in striking (reach)
-        if (height >= 72) { // 6 feet or taller
+        // Height Logic
+        if (height >= 72) { 
             if (art.name === "Muay Thai" || art.name === "MMA") currentScore += 1;
         }
 
-        // Weight Logic: BJJ is famous for helping smaller people control larger opponents
+        // Weight Logic
         if (weight <= 150) {
             if (art.name === "Brazilian Jiu-Jitsu (BJJ)") currentScore += 2;
         }
 
-        // Gender Logic: Highly practical self-defense is often a priority for women
+        // Gender Logic
         if (gender === "female") {
             if (art.name === "Krav Maga" || art.name === "Brazilian Jiu-Jitsu (BJJ)") currentScore += 1;
         }
@@ -88,7 +94,7 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
         }
     });
 
-    // 3. Display the result
+    // Display the result
     document.getElementById('matchName').textContent = bestMatch.name;
     document.getElementById('matchDescription').textContent = bestMatch.description;
     
@@ -96,7 +102,7 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
     document.getElementById('resultBox').classList.remove('hidden');
 });
 
-// Reset functionality remains the same
+// Reset functionality 
 document.getElementById('resetBtn').addEventListener('click', function() {
     document.getElementById('selectorForm').reset();
     document.getElementById('selectorForm').classList.remove('hidden');

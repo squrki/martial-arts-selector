@@ -8,4 +8,8 @@ On the webpage, add the option to input personal attributes, like age, gender, w
 
 The CSS isn't applying properly. Please give me the entire CSS code file to paste rather than just the additional code.
 
+> Received entire contents of the `style.css` file. However, the CSS still wasn't applying. After reviewing the code, I realized that I had deleted other HTML code by mistake. After restoring the missing HTML, the CSS applied properly.
+
+Add a secondary goal, and redetermine the best martial art from the given info.
+
 > 

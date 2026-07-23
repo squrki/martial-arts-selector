@@ -107,4 +107,47 @@ document.getElementById('resetBtn').addEventListener('click', function() {
     document.getElementById('selectorForm').reset();
     document.getElementById('selectorForm').classList.remove('hidden');
     document.getElementById('resultBox').classList.add('hidden');
+    
+    // Clear the new local search fields
+    document.getElementById('zipcode').value = '';
+    document.getElementById('schoolList').innerHTML = '';
+});
+
+// Local School Search Logic
+document.getElementById('searchSchoolsBtn').addEventListener('click', function() {
+    const zipCode = document.getElementById('zipcode').value;
+    const recommendedStyle = document.getElementById('matchName').textContent;
+    const schoolList = document.getElementById('schoolList');
+
+    // Clear previous results
+    schoolList.innerHTML = '';
+
+    // Basic validation
+    if (zipCode.length < 5) {
+        schoolList.innerHTML = '<li style="color: red; text-align: center;">Please enter a valid 5-digit zip code.</li>';
+        return;
+    }
+
+    // Display a loading message
+    schoolList.innerHTML = `<li style="text-align: center;">Searching for ${recommendedStyle} schools near ${zipCode}...</li>`;
+
+    // Simulate an API call delay using setTimeout
+    setTimeout(() => {
+        // This is where you would eventually make a real fetch() request to Google Maps or Yelp
+        
+        schoolList.innerHTML = `
+            <li style="background: #fff; margin: 0.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
+                <strong>Premier ${recommendedStyle} Academy</strong><br>
+                Distance: 3.2 miles away
+            </li>
+            <li style="background: #fff; margin: 0.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
+                <strong>Elite Combat Fitness</strong><br>
+                Distance: 8.5 miles away
+            </li>
+            <li style="background: #fff; margin: 0.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
+                <strong>Downtown ${recommendedStyle} Club</strong><br>
+                Distance: 14.1 miles away
+            </li>
+        `;
+    }, 1500); // 1.5 second simulated delay
 });

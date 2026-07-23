@@ -17,6 +17,7 @@ I want to build a web page that will take input of a person's particular attribu
 TODO: Which features are complete?
 
 TODO: Which features would you build next?
+Complete the API to get the list of local schools.
 
 ## Technologies Used
 

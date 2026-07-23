@@ -90,8 +90,23 @@
         <div id="resultBox" class="hidden">
             <h2>Your Best Match: <span id="matchName"></span></h2>
             <p id="matchDescription"></p>
+
+            <hr>
+
+            <h3>Find a School Near You</h3>
+            <p>Enter your zip code to find matching schools within a 25-mile radius.</p>
+            <div class="question">
+                <input type="text" id="zipcode" placeholder="e.g., 90210">
+                <button type="button" id="searchSchoolsBtn">Search Local Schools</button>
+            </div>
+
+            <ul id="schoolList" style="list-style-type: none; padding: 0; text-align: left;"></ul>
+
+            <hr>
+
             <button type="button" id="resetBtn">Start Over</button>
         </div>
+
     </div>
     <script src="script.js"></script>
 </body>

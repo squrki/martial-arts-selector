@@ -28,6 +28,34 @@ const martialArts = [
     }
 ];
 
+// Prevent selecting the same primary and secondary goals
+document.getElementById('goal').addEventListener('change', function() {
+    const primaryValue = this.value;
+    const secondarySelect = document.getElementById('secondary_goal');
+
+    // 1. Reset all secondary options to be selectable again
+    Array.from(secondarySelect.options).forEach(option => {
+        if (option.value !== "") {
+            option.style.display = 'block';
+            option.disabled = false;
+        }
+    });
+
+    // 2. Find and disable the matching option in the secondary list
+    if (primaryValue !== "") {
+        const optionToDisable = secondarySelect.querySelector(`option[value="${primaryValue}"]`);
+        if (optionToDisable) {
+            optionToDisable.style.display = 'none';
+            optionToDisable.disabled = true;
+
+            // 3. If the user already had this selected as their secondary goal, clear it
+            if (secondarySelect.value === primaryValue) {
+                secondarySelect.value = "";
+            }
+        }
+    }
+});
+
 document.getElementById('selectorForm').addEventListener('submit', function(e) {
     e.preventDefault(); 
 

@@ -1,51 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Martial Arts Selector</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-    <div class="container">
-        <h1>Find Your Martial Art</h1>
-        <p>Answer a few questions to find the style that best fits your circumstances.</p>
-
-        <form id="selectorForm">
-            <div class="question">
-                <label for="goal">1. What is your primary goal?</label>
-                <select id="goal" required>
-                    <option value="">-- Select an option --</option>
-                    <option value="self_defense">Practical Self-Defense</option>
-                    <option value="fitness">High-Intensity Fitness & Cardio</option>
-                    <option value="mindfulness">Mindfulness & Low Impact</option>
-                    <option value="sport">Competition & Sport</option>
-                </select>
-            </div>
-
-            <div class="question">
-                <label for="preference">2. What type of combat interests you most?</label>
-                <select id="preference" required>
-                    <option value="">-- Select an option --</option>
-                    <option value="striking">Punches & Kicks (Striking)</option>
-                    <option value="grappling">Wrestling & Submissions (Grappling)</option>
-                    <option value="mixed">A mix of everything</option>
-                    <option value="weapons">Using traditional weapons</option>
-                </select>
-            </div>
-
-            <button type="submit">Discover My Style</button>
-        </form>
-
-        <div id="resultBox" class="hidden">
-            <h2>Your Best Match: <span id="matchName"></span></h2>
-            <p id="matchDescription"></p>
-            <button type="button" id="resetBtn">Start Over</button>
-        </div>
+<form id="selectorForm">
+    <div class="question">
+        <label for="goal">1. What is your primary goal?</label>
+        <select id="goal" required>
+            <option value="">-- Select an option --</option>
+            <option value="self_defense">Practical Self-Defense</option>
+            <option value="fitness">High-Intensity Fitness & Cardio</option>
+            <option value="mindfulness">Mindfulness & Low Impact</option>
+            <option value="sport">Competition & Sport</option>
+        </select>
     </div>
-    <script src="script.js"></script>
-</body>
 
-</html>
+    <div class="question">
+        <label for="preference">2. What type of combat interests you most?</label>
+        <select id="preference" required>
+            <option value="">-- Select an option --</option>
+            <option value="striking">Punches & Kicks (Striking)</option>
+            <option value="grappling">Wrestling & Submissions (Grappling)</option>
+            <option value="mixed">A mix of everything</option>
+            <option value="weapons">Using traditional weapons</option>
+        </select>
+    </div>
+
+    <hr>
+
+    <div class="question">
+        <label for="age">3. Age</label>
+        <input type="number" id="age" min="5" max="100" placeholder="e.g., 25" required>
+    </div>
+
+    <div class="question">
+        <label for="gender">4. Gender</label>
+        <select id="gender" required>
+            <option value="">-- Select an option --</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other / Prefer not to say</option>
+        </select>
+    </div>
+
+    <div class="question">
+        <label for="weight">5. Weight (lbs)</label>
+        <input type="number" id="weight" min="40" max="400" placeholder="e.g., 160" required>
+    </div>
+
+    <div class="question">
+        <label for="height">6. Height (inches)</label>
+        <input type="number" id="height" min="36" max="96" placeholder="e.g., 70" required>
+    </div>
+
+    <div class="question">
+        <label for="fitness">7. Current Fitness Level</label>
+        <select id="fitness" required>
+            <option value="">-- Select an option --</option>
+            <option value="low">Beginner / Low stamina</option>
+            <option value="medium">Average / Workout occasionally</option>
+            <option value="high">Athlete / Very active</option>
+        </select>
+    </div>
+
+    <button type="submit">Discover My Style</button>
+</form>

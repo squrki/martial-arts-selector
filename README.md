@@ -2,7 +2,7 @@
 
 ## Problem
 
-with the variety of martial arts styles in the world, how does a person choose which style to practice?
+With the variety of martial arts styles in the world, how does a person choose which style to practice?
 
 ## Value
 
@@ -10,7 +10,7 @@ This webpage is designed to help a person select a style that is most appropriat
 
 ## Project Plan
 
-Briefly describe what you intended to build and how you planned to approach it.
+I want to build a web page that will take input of a person's particular attributes for a training style and make suggestions based on those attributes.
 
 ## Features
 

@@ -26,13 +26,11 @@ const martialArts = [
         description: "The ultimate combination of striking and grappling. Highly physically demanding.",
         scores: { self_defense: 2, fitness: 3, mindfulness: 0, sport: 3, striking: 2, grappling: 2, mixed: 3, weapons: 0, fit_low: 0, fit_medium: 1, fit_high: 3 }
     },
-    // New Style: Taekwondo
     {
         name: "Taekwondo",
         description: "A Korean martial art famous for fast, dynamic, and high spinning kicks. It builds massive leg strength and agility.",
         scores: { self_defense: 1, fitness: 2, mindfulness: 0, sport: 3, striking: 3, grappling: 0, mixed: 0, weapons: 0, fit_low: 1, fit_medium: 2, fit_high: 2 }
     },
-    // New Style: Capoeira
     {
         name: "Capoeira",
         description: "An Afro-Brazilian martial art combining dance, acrobatics, and music. It demands and develops extreme fluidity and full-body control.",
@@ -75,6 +73,9 @@ document.getElementById('selectorForm').addEventListener('reset', function() {
             option.disabled = false;
         }
     });
+    
+    // Also hide the result box if the user clicks the "Clear Form" button at the bottom of the form
+    document.getElementById('resultBox').classList.add('hidden');
 });
 
 document.getElementById('selectorForm').addEventListener('submit', function(e) {
@@ -110,15 +111,11 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
         const fitnessKey = "fit_" + fitness;
         if (art.scores[fitnessKey]) currentScore += art.scores[fitnessKey];
 
-        // --- Custom Logic for Personal Attributes --- //
-
         // Flexibility Logic
         if (flexibility === "high") {
             if (art.name === "Taekwondo" || art.name === "Capoeira") currentScore += 2;
         } else if (flexibility === "low") {
-            // Penalize kick-heavy and acrobatic arts for low flexibility
             if (art.name === "Taekwondo" || art.name === "Capoeira") currentScore -= 2;
-            // Favor highly practical or upper-body focused systems
             if (art.name === "Krav Maga") currentScore += 1;
         }
 
@@ -149,8 +146,12 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
     document.getElementById('matchName').textContent = bestMatch.name;
     document.getElementById('matchDescription').textContent = bestMatch.description;
     
-    document.getElementById('selectorForm').classList.add('hidden');
-    document.getElementById('resultBox').classList.remove('hidden');
+    // Show results without hiding the form
+    const resultBox = document.getElementById('resultBox');
+    resultBox.classList.remove('hidden');
+    
+    // Smooth scroll down to the results
+    resultBox.scrollIntoView({ behavior: 'smooth' });
 });
 
 // Local School Search Logic
@@ -186,12 +187,15 @@ document.getElementById('searchSchoolsBtn').addEventListener('click', function()
     }, 1500); 
 });
 
-// Reset functionality 
+// Reset functionality (Start Over Button at bottom)
 document.getElementById('resetBtn').addEventListener('click', function() {
     document.getElementById('selectorForm').reset();
-    document.getElementById('selectorForm').classList.remove('hidden');
     document.getElementById('resultBox').classList.add('hidden');
     
+    // Clear out the search data
     document.getElementById('zipcode').value = '';
     document.getElementById('schoolList').innerHTML = '';
+    
+    // Scroll back to the top of the form
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });

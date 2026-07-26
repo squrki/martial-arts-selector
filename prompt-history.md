@@ -42,4 +42,8 @@
 
 1. Include flexibility level in the personal attributes section, and add additional martial arts styles where flexibility is a useful attribute.
 
-    > Generated new JS and HTML, adding two styles
+    > Generated new JS and HTML, adding two styles.
+
+1. Modify the code to add the match screen to the bottom of the form, giving the user the ability to change selections.
+
+    > Generated new JS.

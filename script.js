@@ -132,8 +132,18 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
             if (art.name === "Brazilian Jiu-Jitsu (BJJ)") currentScore += 2;
         }
 
+        // --- Custom Logic for Personal Attributes --- //
+
+        // Updated Gender Logic: Based on female participation rates
         if (gender === "female") {
-            if (art.name === "Krav Maga" || art.name === "Brazilian Jiu-Jitsu (BJJ)") currentScore += 1;
+            // Taekwondo and fitness-heavy striking arts often have high female enrollment
+            if (art.name === "Taekwondo" || art.name === "Muay Thai") {
+                currentScore += 2;
+            }
+            // BJJ and Krav Maga also maintain strong, dedicated female communities for self-defense
+            if (art.name === "Krav Maga" || art.name === "Brazilian Jiu-Jitsu (BJJ)") {
+                currentScore += 1;
+            }
         }
 
         if (currentScore > highestScore) {

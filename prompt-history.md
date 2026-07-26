@@ -47,3 +47,11 @@
 1. Modify the code to add the match screen to the bottom of the form, giving the user the ability to change selections.
 
     > Generated new JS.
+
+1. Please explain the logic behind the weighting process for each style.
+1. How is gender valued in the style selection?
+1. The code adds a point for krav maga and BJJ if the user if female. Explain the logic behind that valuation.
+1. Modify the valuation based on participation for women.
+
+    > I attempted to understand the logic of how the scores were weighted if the user was female. AI had no particular reason for why the score was weighted in the way it was implemented. So I used current participation of women in each style to change the valuation.
+    

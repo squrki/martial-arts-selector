@@ -21,3 +21,4 @@
 1. Add ability to modify attributes while seeing style match. (prompt 12)
 1. Add additonal logic for weighing scores for female users (prompts 13-16)
 1. Add commit history md
+1. Add secondary and tertiary recommendations (prompt 17)

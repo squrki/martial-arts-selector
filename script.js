@@ -74,7 +74,6 @@ document.getElementById('selectorForm').addEventListener('reset', function() {
         }
     });
     
-    // Also hide the result box if the user clicks the "Clear Form" button at the bottom of the form
     document.getElementById('resultBox').classList.add('hidden');
 });
 
@@ -94,8 +93,8 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
     const height = parseInt(document.getElementById('height').value);
     const gender = document.getElementById('gender').value;
 
-    let bestMatch = null;
-    let highestScore = -1;
+    // Create an array to hold the scores for each art
+    let scoredArts = [];
 
     martialArts.forEach(art => {
         let currentScore = 0;
@@ -132,42 +131,56 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
             if (art.name === "Brazilian Jiu-Jitsu (BJJ)") currentScore += 2;
         }
 
-        // --- Custom Logic for Personal Attributes --- //
-
-        // Updated Gender Logic: Based on female participation rates
+        // Updated Gender Logic based on participation statistics
         if (gender === "female") {
-            // Taekwondo and fitness-heavy striking arts often have high female enrollment
             if (art.name === "Taekwondo" || art.name === "Muay Thai") {
                 currentScore += 2;
             }
-            // BJJ and Krav Maga also maintain strong, dedicated female communities for self-defense
             if (art.name === "Krav Maga" || art.name === "Brazilian Jiu-Jitsu (BJJ)") {
                 currentScore += 1;
             }
         }
 
-        if (currentScore > highestScore) {
-            highestScore = currentScore;
-            bestMatch = art;
-        }
+        // Push the calculated score and the art object to our array
+        scoredArts.push({ art: art, score: currentScore });
     });
 
-    // Display the result
-    document.getElementById('matchName').textContent = bestMatch.name;
-    document.getElementById('matchDescription').textContent = bestMatch.description;
+    // Sort the array in descending order based on the score
+    scoredArts.sort((a, b) => b.score - a.score);
+
+    // Extract the top 3 matches
+    const top1 = scoredArts[0].art;
+    const top2 = scoredArts[1].art;
+    const top3 = scoredArts[2].art;
+
+    // Display the results
+    document.getElementById('matchName1').textContent = top1.name;
+    document.getElementById('matchDesc1').textContent = top1.description;
     
-    // Show results without hiding the form
+    document.getElementById('matchName2').textContent = top2.name;
+    document.getElementById('matchDesc2').textContent = top2.description;
+    
+    document.getElementById('matchName3').textContent = top3.name;
+    document.getElementById('matchDesc3').textContent = top3.description;
+    
+    // Populate the school search dropdown with the top 3 styles
+    const searchSelect = document.getElementById('searchStyle');
+    searchSelect.innerHTML = `
+        <option value="${top1.name}">1. ${top1.name}</option>
+        <option value="${top2.name}">2. ${top2.name}</option>
+        <option value="${top3.name}">3. ${top3.name}</option>
+    `;
+
+    // Show results and scroll
     const resultBox = document.getElementById('resultBox');
     resultBox.classList.remove('hidden');
-    
-    // Smooth scroll down to the results
     resultBox.scrollIntoView({ behavior: 'smooth' });
 });
 
 // Local School Search Logic
 document.getElementById('searchSchoolsBtn').addEventListener('click', function() {
     const zipCode = document.getElementById('zipcode').value;
-    const recommendedStyle = document.getElementById('matchName').textContent;
+    const selectedStyle = document.getElementById('searchStyle').value;
     const schoolList = document.getElementById('schoolList');
 
     schoolList.innerHTML = '';
@@ -177,12 +190,12 @@ document.getElementById('searchSchoolsBtn').addEventListener('click', function()
         return;
     }
 
-    schoolList.innerHTML = `<li style="text-align: center;">Searching for ${recommendedStyle} schools near ${zipCode}...</li>`;
+    schoolList.innerHTML = `<li style="text-align: center;">Searching for ${selectedStyle} schools near ${zipCode}...</li>`;
 
     setTimeout(() => {
         schoolList.innerHTML = `
             <li style="background: #fff; margin: 0.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
-                <strong>Premier ${recommendedStyle} Academy</strong><br>
+                <strong>Premier ${selectedStyle} Academy</strong><br>
                 Distance: 3.2 miles away
             </li>
             <li style="background: #fff; margin: 0.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
@@ -190,7 +203,7 @@ document.getElementById('searchSchoolsBtn').addEventListener('click', function()
                 Distance: 8.5 miles away
             </li>
             <li style="background: #fff; margin: 0.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
-                <strong>Downtown ${recommendedStyle} Club</strong><br>
+                <strong>Downtown ${selectedStyle} Club</strong><br>
                 Distance: 14.1 miles away
             </li>
         `;

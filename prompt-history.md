@@ -54,4 +54,7 @@
 1. Modify the valuation based on participation for women.
 
     > I attempted to understand the logic of how the scores were weighted if the user was female. AI had no particular reason for why the score was weighted in the way it was implemented. So I used current participation of women in each style to change the valuation.
-    
+
+1. Add a list showing secondary and tertiary recommendations to the output, with the option for searching for schools based on primary, secondary, or tertiary recommendations.
+
+    > Generated new JS and HTML

@@ -99,13 +99,29 @@
         </form>
 
         <div id="resultBox" class="hidden">
-            <h2>Your Best Match: <span id="matchName"></span></h2>
-            <p id="matchDescription"></p>
+            <h2>Your Top Matches</h2>
+
+            <div style="margin-bottom: 1.5rem; text-align: left;">
+                <h3 style="color: #e74c3c; margin-bottom: 0.2rem;">1. <span id="matchName1"></span></h3>
+                <p id="matchDesc1" style="margin-top: 0;"></p>
+
+                <h3 style="color: #2c3e50; margin-bottom: 0.2rem;">2. <span id="matchName2"></span></h3>
+                <p id="matchDesc2" style="margin-top: 0;"></p>
+
+                <h3 style="color: #2c3e50; margin-bottom: 0.2rem;">3. <span id="matchName3"></span></h3>
+                <p id="matchDesc3" style="margin-top: 0;"></p>
+            </div>
 
             <hr>
 
             <h3>Find a School Near You</h3>
-            <p>Enter your zip code to find matching schools within a 25-mile radius.</p>
+            <p>Select a style and enter your zip code to find matching schools within a 25-mile radius.</p>
+
+            <div class="question">
+                <label for="searchStyle">Style to Search:</label>
+                <select id="searchStyle"></select>
+            </div>
+
             <div class="question">
                 <input type="text" id="zipcode" placeholder="e.g., 90210">
                 <button type="button" id="searchSchoolsBtn">Search Local Schools</button>

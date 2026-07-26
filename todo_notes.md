@@ -7,7 +7,7 @@ Your repository should include
 * Source code ✅
 * README ✅
 * Prompt history ✅
-* Commit history
+* Commit history ✅
 
 ## Commit Frequently ✅
 

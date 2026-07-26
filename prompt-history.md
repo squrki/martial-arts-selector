@@ -40,6 +40,6 @@
 
     > AI stated that the image was of a martial arts gymnasium.
 
-1. The visible parts of the image only show a sunset. Please select a different image.
+1. Include flexibility level in the personal attributes section, and add additional martial arts styles where flexibility is a useful attribute.
 
-    > 
+    > Generated new JS and HTML, adding two styles

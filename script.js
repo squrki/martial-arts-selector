@@ -25,6 +25,18 @@ const martialArts = [
         name: "MMA (Mixed Martial Arts)",
         description: "The ultimate combination of striking and grappling. Highly physically demanding.",
         scores: { self_defense: 2, fitness: 3, mindfulness: 0, sport: 3, striking: 2, grappling: 2, mixed: 3, weapons: 0, fit_low: 0, fit_medium: 1, fit_high: 3 }
+    },
+    // New Style: Taekwondo
+    {
+        name: "Taekwondo",
+        description: "A Korean martial art famous for fast, dynamic, and high spinning kicks. It builds massive leg strength and agility.",
+        scores: { self_defense: 1, fitness: 2, mindfulness: 0, sport: 3, striking: 3, grappling: 0, mixed: 0, weapons: 0, fit_low: 1, fit_medium: 2, fit_high: 2 }
+    },
+    // New Style: Capoeira
+    {
+        name: "Capoeira",
+        description: "An Afro-Brazilian martial art combining dance, acrobatics, and music. It demands and develops extreme fluidity and full-body control.",
+        scores: { self_defense: 1, fitness: 3, mindfulness: 1, sport: 0, striking: 2, grappling: 0, mixed: 1, weapons: 0, fit_low: 0, fit_medium: 1, fit_high: 3 }
     }
 ];
 
@@ -33,7 +45,6 @@ document.getElementById('goal').addEventListener('change', function() {
     const primaryValue = this.value;
     const secondarySelect = document.getElementById('secondary_goal');
 
-    // 1. Reset all secondary options to be selectable again
     Array.from(secondarySelect.options).forEach(option => {
         if (option.value !== "") {
             option.style.display = 'block';
@@ -41,19 +52,29 @@ document.getElementById('goal').addEventListener('change', function() {
         }
     });
 
-    // 2. Find and disable the matching option in the secondary list
     if (primaryValue !== "") {
         const optionToDisable = secondarySelect.querySelector(`option[value="${primaryValue}"]`);
         if (optionToDisable) {
             optionToDisable.style.display = 'none';
             optionToDisable.disabled = true;
 
-            // 3. If the user already had this selected as their secondary goal, clear it
             if (secondarySelect.value === primaryValue) {
                 secondarySelect.value = "";
             }
         }
     }
+});
+
+// Restore hidden secondary options when the main form is cleared
+document.getElementById('selectorForm').addEventListener('reset', function() {
+    const secondarySelect = document.getElementById('secondary_goal');
+    
+    Array.from(secondarySelect.options).forEach(option => {
+        if (option.value !== "") {
+            option.style.display = 'block';
+            option.disabled = false;
+        }
+    });
 });
 
 document.getElementById('selectorForm').addEventListener('submit', function(e) {
@@ -64,6 +85,7 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
     const secondaryGoal = document.getElementById('secondary_goal').value;
     const preference = document.getElementById('preference').value;
     const fitness = document.getElementById('fitness').value;
+    const flexibility = document.getElementById('flexibility').value;
 
     // Get personal attributes
     const age = parseInt(document.getElementById('age').value);
@@ -77,45 +99,46 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
     martialArts.forEach(art => {
         let currentScore = 0;
 
-        // Goal Points: Multiply primary goal by 2 to give it more weight
         if (art.scores[goal]) currentScore += (art.scores[goal] * 2);
         
-        // Add secondary goal points if the user selected one
         if (secondaryGoal !== "" && art.scores[secondaryGoal]) {
             currentScore += art.scores[secondaryGoal];
         }
 
-        // Preference Points
         if (art.scores[preference]) currentScore += art.scores[preference];
         
-        // Fitness Points
         const fitnessKey = "fit_" + fitness;
         if (art.scores[fitnessKey]) currentScore += art.scores[fitnessKey];
 
         // --- Custom Logic for Personal Attributes --- //
 
-        // Age Logic
+        // Flexibility Logic
+        if (flexibility === "high") {
+            if (art.name === "Taekwondo" || art.name === "Capoeira") currentScore += 2;
+        } else if (flexibility === "low") {
+            // Penalize kick-heavy and acrobatic arts for low flexibility
+            if (art.name === "Taekwondo" || art.name === "Capoeira") currentScore -= 2;
+            // Favor highly practical or upper-body focused systems
+            if (art.name === "Krav Maga") currentScore += 1;
+        }
+
         if (age >= 50) {
             if (art.name === "Tai Chi") currentScore += 2;
-            if (art.name === "MMA" || art.name === "Muay Thai") currentScore -= 1;
+            if (art.name === "MMA" || art.name === "Muay Thai" || art.name === "Capoeira") currentScore -= 1;
         }
 
-        // Height Logic
         if (height >= 72) { 
-            if (art.name === "Muay Thai" || art.name === "MMA") currentScore += 1;
+            if (art.name === "Muay Thai" || art.name === "MMA" || art.name === "Taekwondo") currentScore += 1;
         }
 
-        // Weight Logic
         if (weight <= 150) {
             if (art.name === "Brazilian Jiu-Jitsu (BJJ)") currentScore += 2;
         }
 
-        // Gender Logic
         if (gender === "female") {
             if (art.name === "Krav Maga" || art.name === "Brazilian Jiu-Jitsu (BJJ)") currentScore += 1;
         }
 
-        // Update highest score
         if (currentScore > highestScore) {
             highestScore = currentScore;
             bestMatch = art;
@@ -130,39 +153,22 @@ document.getElementById('selectorForm').addEventListener('submit', function(e) {
     document.getElementById('resultBox').classList.remove('hidden');
 });
 
-// Reset functionality 
-document.getElementById('resetBtn').addEventListener('click', function() {
-    document.getElementById('selectorForm').reset();
-    document.getElementById('selectorForm').classList.remove('hidden');
-    document.getElementById('resultBox').classList.add('hidden');
-    
-    // Clear the new local search fields
-    document.getElementById('zipcode').value = '';
-    document.getElementById('schoolList').innerHTML = '';
-});
-
 // Local School Search Logic
 document.getElementById('searchSchoolsBtn').addEventListener('click', function() {
     const zipCode = document.getElementById('zipcode').value;
     const recommendedStyle = document.getElementById('matchName').textContent;
     const schoolList = document.getElementById('schoolList');
 
-    // Clear previous results
     schoolList.innerHTML = '';
 
-    // Basic validation
     if (zipCode.length < 5) {
         schoolList.innerHTML = '<li style="color: red; text-align: center;">Please enter a valid 5-digit zip code.</li>';
         return;
     }
 
-    // Display a loading message
     schoolList.innerHTML = `<li style="text-align: center;">Searching for ${recommendedStyle} schools near ${zipCode}...</li>`;
 
-    // Simulate an API call delay using setTimeout
     setTimeout(() => {
-        // This is where you would eventually make a real fetch() request to Google Maps or Yelp
-        
         schoolList.innerHTML = `
             <li style="background: #fff; margin: 0.5rem 0; padding: 1rem; border: 1px solid #ccc; border-radius: 4px;">
                 <strong>Premier ${recommendedStyle} Academy</strong><br>
@@ -177,17 +183,15 @@ document.getElementById('searchSchoolsBtn').addEventListener('click', function()
                 Distance: 14.1 miles away
             </li>
         `;
-    }, 1500); // 1.5 second simulated delay
+    }, 1500); 
 });
 
-// Ensure hidden secondary options are restored when the main form is cleared
-document.getElementById('selectorForm').addEventListener('reset', function() {
-    const secondarySelect = document.getElementById('secondary_goal');
+// Reset functionality 
+document.getElementById('resetBtn').addEventListener('click', function() {
+    document.getElementById('selectorForm').reset();
+    document.getElementById('selectorForm').classList.remove('hidden');
+    document.getElementById('resultBox').classList.add('hidden');
     
-    Array.from(secondarySelect.options).forEach(option => {
-        if (option.value !== "") {
-            option.style.display = 'block';
-            option.disabled = false;
-        }
-    });
+    document.getElementById('zipcode').value = '';
+    document.getElementById('schoolList').innerHTML = '';
 });

@@ -1,4 +1,4 @@
-# martialarts
+# martial-arts-selector
 
 ## Problem
 
